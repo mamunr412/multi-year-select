@@ -1,5 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
-
+declare global {
+  interface Window {
+    tailwind?: {
+      config?: Record<string, unknown>;
+    };
+  }
+}
 interface MultiYearSelectProps {
   startYear?: number;
   endYear?: number;
@@ -151,12 +157,15 @@ const MultiYearSelect: React.FunctionComponent<MultiYearSelectProps> = ({
               >
                 Select All
               </button>
-              <button
-                onClick={handleClearAll}
-                className="text-[12px] text-red-600 hover:text-red-800"
-              >
-                Clear All
-              </button>
+
+              {years?.length && (
+                <button
+                  onClick={handleClearAll}
+                  className="text-[12px] text-red-600 hover:text-red-800"
+                >
+                  Clear All
+                </button>
+              )}
             </div>
             {/* <div className="text-sm text-gray-500">
               {selectedYears.length} selected
