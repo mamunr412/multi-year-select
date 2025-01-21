@@ -11,7 +11,6 @@ const loadTailwind = () => {
     const script = document.createElement("script");
     script.src = "https://cdn.tailwindcss.com";
     script.onload = () => {
-      // Optionally configure Tailwind here
       if (window?.tailwind) {
         window.tailwind.config = {
           theme: {
@@ -27,7 +26,7 @@ const loadTailwind = () => {
     document.head.appendChild(script);
   }
 };
-
+loadTailwind();
 const MultiYearSelect: React.FunctionComponent<MultiYearSelectProps> = ({
   startYear: initialStartYear = 2000,
   endYear: initialEndYear = new Date().getFullYear(),
@@ -38,13 +37,6 @@ const MultiYearSelect: React.FunctionComponent<MultiYearSelectProps> = ({
   const [startYear, setStartYear] = useState(initialStartYear);
   const [endYear, setEndYear] = useState(initialEndYear);
   const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    // Load Tailwind only on the client side
-    if (typeof window !== "undefined") {
-      loadTailwind();
-    }
-  }, []);
 
   const years = Array.from(
     { length: endYear - startYear + 1 },
@@ -125,7 +117,7 @@ const MultiYearSelect: React.FunctionComponent<MultiYearSelectProps> = ({
           )}
         </div>
         <svg
-          className="w-2.5 h-2.5 ms-3 opacity-30"
+          className="max-w-2.5 max-h-2.5 min-w-2.5 max-h-2.5 ms-3 opacity-30"
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -133,9 +125,9 @@ const MultiYearSelect: React.FunctionComponent<MultiYearSelectProps> = ({
         >
           <path
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
             d="m1 1 4 4 4-4"
           />
         </svg>
@@ -152,7 +144,7 @@ const MultiYearSelect: React.FunctionComponent<MultiYearSelectProps> = ({
                 Select All
               </button>
 
-              {years?.length && (
+              {selectedYears?.length > 0 && (
                 <button
                   onClick={handleClearAll}
                   className="text-[12px] text-red-600 hover:text-red-800"
