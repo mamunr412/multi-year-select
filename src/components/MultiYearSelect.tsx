@@ -1,11 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-declare global {
-  interface Window {
-    tailwind?: {
-      config?: Record<string, unknown>;
-    };
-  }
-}
+
 interface MultiYearSelectProps {
   startYear?: number;
   endYear?: number;
